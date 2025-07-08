@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: hci-django-app
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn hci_project.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: hci_project.settings
+      - key: PYTHON_VERSION
+        value: 3.11
