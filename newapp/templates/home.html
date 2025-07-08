@@ -1,0 +1,752 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<style>
+
+  .fullscreen-carousel {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    top:30%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    height: 85vh;
+    max-height: 800px;
+    overflow: hidden;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+ 
+  }
+
+  header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .fullscreen-carousel .carousel,
+  .fullscreen-carousel .carousel-inner,
+  .fullscreen-carousel .carousel-item {
+    height: 90%;
+    margin: 0;
+    padding: 0;
+   
+
+  }
+
+  .fullscreen-carousel .carousel-item img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .fullscreen-carousel .carousel-caption {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: none;
+    padding: 0;
+  }
+
+  .fullscreen-carousel .carousel-caption h2 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .fullscreen-carousel .carousel-control-prev,
+  .fullscreen-carousel .carousel-control-next {
+    width: 5%;
+  }
+
+  .fullscreen-carousel .carousel-control-prev-icon,
+  .fullscreen-carousel .carousel-control-next-icon {
+    background-size: 60%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Fixed Shop Now Button */
+  .btn-wrapper-fixed {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .neon-btn {
+    background-color: 		#97642F;
+
+    
+    color: white;
+    padding: 12px 30px;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: all 1s ease;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+
+  .neon-btn:hover {
+    background-color: #B8854E;
+    color: white;
+    box-shadow: 0 0 5px s #B8854E, 0 0 10px  #B8854E, 0 0 20px  #B8854E, 0 0 40px #B8854E;
+
+    transform: scale(1);
+  }
+
+  /* Animated Text Heading */
+  .main-headline {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #000000, 0 0 20px #000000;
+    z-index: 10;
+    text-align: center;
+    opacity: 0;
+    animation: slideIn 1s forwards;
+  }
+
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 40%);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .second-slide-caption {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateX(200%);
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
+    z-index: 10;
+    text-align: right;
+    animation: slideFromRightToCenter 2s forwards;
+  }
+
+  @keyframes slideFromRightToCenter {
+    0% {
+      opacity: 0;
+      transform: translateX(200%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(-1%);
+    }
+  }
+
+  .category-box {
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .category-box:hover {
+    background-color: #e0f7fa;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .category-box h4 {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .product-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: 0.1s ease;
+    background-color: #fff;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-dairy {
+    background-color:#2c79b8;
+    border: none;
+  }
+
+  .btn-dairy:hover {
+    background-color: #000000;
+  }
+
+  .slider-left,
+  .slider-right {
+    position: absolute;
+    top: -25px;
+    padding: 5px 15px;
+    background-color: #2c79b8;
+    color: #000;
+    font-weight: bold;
+    border-radius: 20px;
+    opacity: 0;
+  }
+
+  .slider-left {
+    left: 0;
+    animation: slideFromLeft 2s forwards;
+  }
+
+  .slider-right {
+    right: 0;
+    animation: slideFromRight 2s forwards;
+  }
+
+  @keyframes slideFromLeft {
+    0% {
+      left: -140px;
+      opacity: 0;
+    }
+    100% {
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideFromRight {
+    0% {
+      right: -140px;
+      opacity: 0;
+    }
+    100% {
+      right: 50%;
+      transform: translateX(50%);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .fullscreen-carousel {
+      height: 70vh;
+    }
+
+    .btn-wrapper-fixed {
+  text-align: center;           /* Centers inline/inline-block elements */
+  width: 100%;                  /* Full width for responsiveness */
+  margin: 0 auto;               /* Center the container itself */
+  padding: 20px 0;              /* Optional spacing */
+}
+
+    .neon-btn {
+      padding: 8px 20px;
+      font-size: 1rem;
+    }
+
+    .fullscreen-carousel .carousel-control-prev-icon,
+    .fullscreen-carousel .carousel-control-next-icon {
+      width: 30px;
+      height: 30px;
+    }
+  }
+</style>
+
+<div class="fullscreen-carousel">
+  <div class="main-headline">Delivering Nature's Freshness Every Day</div>
+
+  <div class="btn-wrapper-fixed">
+    <a href="{% url 'Commercial' %}" class="btn neon-btn">Shop Now</a>
+  </div>
+
+  <div id="milkCarousel" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="2000">
+    <div class="carousel-inner h-100">
+      <div class="carousel-item active h-100">
+        <img src="{% static 'images/land2.jpeg' %}" class="d-block w-100" alt="Fresh Dairy Products">
+        <div class="carousel-caption first-slide-caption">
+      
+        </div>
+      </div>
+      <div class="carousel-item h-100">
+        <img src="{% static 'images/dairy.jpg' %}" class="d-block w-100" alt="Organic Milk">
+
+      </div>
+      <div class="carousel-item h-100">
+        <img src="{% static 'images/milk 14.jpg' %}" class="d-block w-100" alt="Farm Fresh Milk">
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#milkCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#milkCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<section class="container my-5 py-4">
+  <h2 class="text-center mb-4">Our Products</h2>
+  <div class="container">
+    <div class="row mb-4 g-4 justify-content-center">
+
+      <!-- Commercial Box with Slider on Hover -->
+      <div class="col-md-5 position-relative">
+       
+        <div class="category-box position-relative"  style="background-color:#256D85;">
+          <div id="commercialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <a href="{% url 'Commercial' %}" class="text-decoration-none text-dark">
+                  <h4 style="color: white;">Commercial</h4>
+                  <p style="color: white;">Bulk orders for businesses & retailers</p>
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a href="Commercial" class="text-decoration-none text-dark">
+                  <h4 style="color: white;">Corporate Orders</h4>
+                  <p style="color: white;">Special pricing for large-scale needs</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Domestic Box with Slider -->
+      <div class="col-md-5 position-relative ">
+        
+        <div class="category-box" style="background-color:#256D85;">
+          <div id="domesticCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <a href="{% url 'Domestic' %}" class="text-decoration-none text-dark">
+                  <h4 style="color: white;">Domestic</h4>
+                  <p style="color: white;">Milk & dairy for your home</p>
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a href="Domestic" class="text-decoration-none text-dark">
+                  <h4 style="color: white;">Organic Milk</h4>
+                  <p style="color: white;">Fresh and natural dairy at your doorstep</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<h1 style="text-align: center;">Our Coustmers</h1>
+
+<style>
+  body {
+    background-color:#256D85;
+  }
+
+  section {
+    padding: 30px 0;
+    
+  }
+
+  .testimonial-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 350px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  .testimonial-card img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+  }
+
+  .testimonial-content {
+    padding: 15px;
+  }
+
+  .testimonial-name {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  h2.section-heading {
+    margin-bottom: 40px;
+    margin-top: -60px;
+  }
+
+  /* Adjusting section to move it a bit higher */
+  #why-choose-us {
+    margin-top: -20px;
+  }
+
+  /* Animation */
+  @keyframes dropDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .drop-animate {
+    animation: dropDown 3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;;
+  }
+
+  @media (max-width: 768px) {
+    .testimonial-card {
+      height: 300px;
+    }
+
+    .testimonial-content {
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    h2.section-heading {
+      font-size: 24px;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+<section id="why-choose-us">
+<div class="container">
+  
+
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="testimonial-card" data-delay="0.1s">
+        <img src="{% static 'images/testmonial1.jpeg' %}" alt="User 1">
+        <div class="testimonial-content">
+          <p>"The service was amazing. I really enjoyed the quality!"</p>
+          <h5 class="testimonial-name">Ali Abdullah</h5>
+          <small>Lahore</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="testimonial-card" data-delay="0.2s">
+        <img src="{% static 'images/testmonial2.jpeg' %}" alt="User 2">
+        <div class="testimonial-content">
+          <p>"Great experience. Highly recommend to anyone!"</p>
+          <h5 class="testimonial-name">Fatima Khan</h5>
+          <small>Karachi</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="testimonial-card" data-delay="0.3s">
+        <img src="{% static 'images/testmonial3.jpeg' %}" alt="User 3">
+        <div class="testimonial-content">
+          <p>"I am so impressed with the quality of the product!"</p>
+          <h5 class="testimonial-name">Zain Raza</h5>
+          <small>Faisalabad</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="testimonial-card" data-delay="0.4s">
+        <img src="{% static 'images/testmonial4.png' %}" alt="User 4">
+        <div class="testimonial-content">
+          <p>"Absolutely love the quality of milk. Tastes just like farm-fresh!"</p>
+          <h5 class="testimonial-name">Ayesha Malik</h5>
+          <small>Islamabad</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="testimonial-card" data-delay="0.5s">
+        <img src="{% static 'images/testmonial1.jpeg' %}" alt="User 5">
+        <div class="testimonial-content">
+          <p>"Best milk delivery service in the city! Always fresh and delicious."</p>
+          <h5 class="testimonial-name">Hassan Iqbal</h5>
+          <small>Multan</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="testimonial-card" data-delay="0.6s">
+        <img src="{% static 'images/testmonial4.png' %}" alt="User 6">
+        <div class="testimonial-content">
+          <p>"Reliable delivery and premium quality milk. Highly satisfied."</p>
+          <h5 class="testimonial-name">Mariam Shah</h5>
+          <small>Rawalpindi</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Animation Script -->
+<script>
+function revealCards() {
+  const section = document.getElementById('why-choose-us');
+  const cards = document.querySelectorAll('.testimonial-card');
+  const triggerBottom = window.innerHeight * 0.85;
+  const sectionTop = section.getBoundingClientRect().top;
+
+  if (sectionTop < triggerBottom) {
+    cards.forEach(card => {
+      const cardTop = card.getBoundingClientRect().top;
+      const delay = card.getAttribute('data-delay') || '0s';
+
+      if (cardTop < triggerBottom && !card.classList.contains('drop-animate')) {
+        card.style.animationDelay = delay;
+        card.classList.add('drop-animate');
+      }
+    });
+  }
+}
+
+window.addEventListener('scroll', revealCards);
+window.addEventListener('load', revealCards);
+</script>
+
+
+<!-- Section -->
+<section class="py-5 text-center bg-dark text-white">
+  <div class="container">
+    <h2 class="mb-4 fade-up">Why Choose Us?</h2>
+    <div class="row g-4">
+      <div class="col-md-4 fade-up" data-delay="0s">
+        <h4>100% Pure</h4>
+        <p>No preservatives or additives</p>
+      </div>
+      <div class="col-md-4 fade-up" data-delay="1s">
+        <h4>Daily Delivery</h4>
+        <p>Freshness delivered to your door</p>
+      </div>
+      <div class="col-md-4 fade-up counter-section" data-delay="2s">
+        <h4>Trusted by <span class="counter" data-target="1050">1000</span>+ Homes</h4>
+        <p>Across Lahore, Karachi, and Islamabad</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.1s ease-in, transform 1s ease-out;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+<script>
+
+  // Fade-up logic with delay
+  const fade_Elements = document.querySelectorAll('.fade-up');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.getAttribute('data-delay') || '0s';
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, parseFloat(delay) * 1000);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  fade_Elements.forEach(el => observer.observe(el));
+
+  // Counter logic (starts AFTER 2s delay + fade-up)
+  const counter = document.querySelector('.counter');
+  let started = false;
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !started) {
+        started = true;
+
+        // Wait 3 seconds total (2s delay + 1s animation buffer)
+        setTimeout(() => {
+          const target = parseInt(counter.getAttribute('data-target'));
+          let count = 0; // Start from 0
+
+          const increment = target / 10; // Increment in 10 steps
+
+          const updateCounter = () => {
+            count += increment;
+            if (count < target) {
+              counter.innerText = Math.floor(count); // Display whole number
+              setTimeout(updateCounter, 1000); // Increment every 1 second
+            } else {
+              counter.innerText = target;
+            }
+          };
+
+          updateCounter();
+        }, 3000);
+      }
+    });
+  }, { threshold: 1 });
+
+  counterObserver.observe(counter);
+</script>
+
+
+
+<!-- MAP -->
+<style>
+  /* Basic styling */
+  body {
+    background-color: #f5f5f5;
+  }
+
+  section.py-5 {
+    background-color: #f5f5f5;
+    padding: 50px 0;
+  }
+
+  .full-banner {
+    width: 100%;
+    background: linear-gradient(to right, black,black); /* Gradient color */
+    padding: 10px 0; /* Reduced the padding to make the height smaller */
+    margin-bottom: 30px;
+    border-radius: 8px;
+     /* Border on the right */
+  }
+
+  .full-banner h2 {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    margin: 0;
+  }
+
+  /* Map and bike container styling */
+  .map-container,
+  .bike-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px; /* Added border radius */
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(100px); /* Start from below */
+    transition: opacity 1s, transform 1s; /* Transition for animation */
+  }
+
+  /* When the element becomes visible */
+  .visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .map-container img,
+  .bike-container img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+
+  /* Styling for media queries */
+  @media (max-width: 768px) {
+    .map-container img,
+    .bike-container img {
+      height: auto;
+    }
+  }
+</style>
+
+<body>
+
+  <section class="py-5">
+    <div class="container">
+      <!-- Banner -->
+      <div class="full-banner text-center ">
+        <h2 class="mb-0 text-white">We Deliver To</h2>
+        <p style="color: white;">Open Map To See Delivery Rider in Which Location</p>
+      </div>
+
+      <!-- Two-column layout for Map and Bike sections -->
+      <div class="row align-items-center">
+        <!-- Left: Map Section -->
+        <div class="col-md-6">
+          <div class="map-container fade-up">
+            <a href="https://www.google.com/maps?q=Lahore" target="_blank">
+              <img src="{% static 'images/rider2.png' %}" alt="rider">
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Bike Section -->
+        <div class="col-md-6 text-center">
+          <div class="bike-container fade-up">
+            <a href="https://www.google.com/maps?q=Lahore" target="_blank"></a>
+            <img src="{% static 'images/location.jpeg' %}" alt="google map">
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center mt-4">Currently serving Lahore, Faisalabad, Karachi, and surrounding areas.</p>
+    </div>
+  </section>
+
+  <script>
+    // Fade-up logic for map and bike sections
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    function checkVisibility() {
+      fadeElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.5) {  // 50% of the element is visible
+          el.classList.add('visible');
+        }
+      });
+    }
+
+    // Listen to the scroll event to check the visibility of elements
+    window.addEventListener('scroll', checkVisibility);
+
+    // Trigger the check initially in case elements are already in view
+    checkVisibility();
+  </script>
+
+</body>
+
+
+{% endblock %}

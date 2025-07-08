@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<style>
+  /* Commercial Background Section */
+.commercial-background {
+    background-image: url("{% static 'images/farm.jpg' %}");
+    background-size: cover;
+    background-position: center 20%;  /* 20% se neeche shift karna */
+    background-attachment: scroll;   /* Attachment ko scroll karenge */
+    height: 100%;
+    min-height: 140%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+}
+
+
+  /* Heading Style */
+.section-title {
+    font-size: 2rem;
+    color:#dcdcdc;                 /* White color for heading */
+    position: absolute;              /* Positioning relative to the parent container */
+    top: 20%;                        /* Adjust the top property to move it down a bit from the navbar */
+    left: 50%;                       /* Horizontally center */
+    transform: translate(-50%, -50%); /* Adjust the exact position */
+    text-align: center;
+    z-index: 10;                     /* Ensures the title appears above other elements */
+}
+
+  .products-section {
+      padding: 40px 20px;
+      text-align: center;
+      background-color: #f9f9f9;
+  }
+
+  .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+  }
+
+  .product-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+      animation: slideIn 0.6s ease forwards;
+      opacity: 0;
+      height: 100%;
+  }
+
+  .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+  }
+
+  .product-card h3 {
+      font-size: 1.3rem;
+      margin: 10px 0;
+  }
+
+  .product-card p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 15px;
+  }
+
+  .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: auto;
+  }
+
+  .btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+  }
+
+  .btn.buy {
+      background-color: #3498db;
+      color: white;
+  }
+
+  .btn.subscribe {
+      background-color: #2ecc71;
+      color: white;
+  }
+
+  @keyframes slideIn {
+      to {
+          transform: translateX(0);
+          opacity: 1;
+      }
+      from {
+          transform: translateX(-50px);
+          opacity: 0;
+      }
+  }
+
+  @media (max-width: 992px) {
+      .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+      }
+  }
+
+  @media (max-width: 600px) {
+      .products-grid {
+          grid-template-columns: repeat(1, 1fr);
+      }
+
+      .product-card img {
+          height: 180px;
+      }
+  }
+.category-box {
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 40%;
+    position: relative;
+    opacity: 0;
+    animation: slideUpFadeIn 1s ease-out forwards;
+    animation-delay: 0.3s; /* Optional: delay to make it smoother */
+}
+
+@keyframes slideUpFadeIn {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.category-box h4 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+</style>
+
+<!-- Commercial Section with Background Image -->
+<section class="commercial-background">
+   <div class="content-padding">
+    <!-- Title on top of background -->
+    <h2 class="section-title">Choose category</h2>
+
+    <section class="container my-5 py-4">
+        <div class="container">
+            <div class="row mb-4 g-4 justify-content-center">
+
+                <!-- Commercial Box without Slider -->
+                <div class="col-md-5 position-relative">
+                    <div class="category-box">
+                        <a href="{% url 'buffalows' %}" class="text-decoration-none text-dark">
+                            <h4>Buffalows</h4>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Domestic Box without Slider -->
+                <div class="col-md-5 position-relative">
+                    <div class="category-box">
+                        <a href="{% url 'cows' %}" class="text-decoration-none text-dark">
+                            <h4>Cows</h4>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>
+
+
+{% endblock %}

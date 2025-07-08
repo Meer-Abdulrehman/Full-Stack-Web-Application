@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<style>
+  .about-section {
+    background: linear-gradient(to right,#2c79b8, #ffffff);
+    padding: 50px 20px;
+    border-radius: 20px;
+  }
+
+  .about-image {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+
+  .about-text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  @media (max-width: 768px) {
+    .about-text {
+      text-align: center;
+    }
+  }
+</style>
+
+<div class="container about-section my-5">
+  <div class="row align-items-center">
+  
+    <div class="col-md-6 mb-4 mb-md-0">
+      <img src="{% static 'images/6b18f1a78dedb6b58296b6843e7e4643.jpg' %}" alt="Dairy Farm" class="about-image">
+    </div>
+
+    <div class="col-md-6 about-text">
+      <h2 class="mb-4">About Our Dairy Milk Service</h2>
+      <p>
+        We are a dedicated dairy farm focused on delivering fresh, pure, and hygienic milk directly to your doorstep. Our mission is to provide families and shop owners with high-quality milk straight from our well-maintained farm, ensuring health, freshness, and trust with every bottle.
+      </p>
+      <p>
+        At our dairy, we take great care of our cows by feeding them naturally and keeping them in a clean and safe environment. No preservatives, no middlemen — just natural milk delivered every day. We believe that fresh milk should be easy to get, and that's why we offer quick and safe delivery to homes and local shops.
+      </p>
+     
+    </div>
+  </div>
+</div>
+{% endblock %}

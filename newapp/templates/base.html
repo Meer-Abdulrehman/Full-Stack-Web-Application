@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dairy To Home | {% block title %}{% endblock %}</title>
+
+ 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <head>
+        <!-- Include Google Fonts for a more stylish font -->
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    </head>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        .custom-navbar {
+    background-color:#256D85;  /* Fresh green - primary color */
+}
+
+.nav-link {
+    color: #FFFFFF !important;  /* White text for contrast */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);  /* Light transparent hover effect */
+    color: #2C3E50 !important;  /* Creamy white on hover */
+}
+
+.navbar-brand {
+    font-family: 'Lobster', cursive;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFFFFF !important;  /* Brand name in white */
+}
+
+.navbar-brand i {
+    font-size: 1.8rem;
+    margin-right: 10px;
+    color: #FFFFFF !important;  /* Icon color white */
+}
+
+    
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    
+        header {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    
+        .navbar-nav .nav-link:hover {
+            color: rgb(250, 250, 250) !important;
+        }
+    </style>
+    
+    <header>
+        <nav class="navbar navbar-expand-lg custom-navbar  fixed-top">
+            <div class="container">
+                <a class="navbar-brand text-white d-flex align-items-center" href="{% url 'home' %}">
+                    <i class="fas fa-bottle-water me-2"></i> Dairy To Home
+                </a>
+                <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'home' %}">Home</a></li>
+                         <li class="nav-item"><a class="nav-link text-white" href="{% url 'about' %}">About</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'Commercial' %}">Commercial</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'Domestic' %}">Domestic</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'contact' %}">Contact-Us</a></li>
+                       
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'login' %}">Login</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container my-5">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
+  <!-- Footer -->
+<footer class="footer-section text-white pt-5 pb-4" style="background-color:#256D85"> <!-- Deep blue -->
+  <div class="container text-md-left">
+    <div class="row text-md-left text-center">
+      
+      <!-- Company Info -->
+      <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #D3D3D5;">Dairy To Home</h5>
+        <p>Delivering farm-fresh milk to your doorstep with quality and care across major cities.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #D3D3D5;">Quick Links</h5>
+        <p><a href="#" class="text-white text-decoration-none footer-link">Home</a></p>
+        <p><a href="#" class="text-white text-decoration-none footer-link">About</a></p>
+        <p><a href="#" class="text-white text-decoration-none footer-link">Services</a></p>
+        <p><a href="#" class="text-white text-decoration-none footer-link">Contact</a></p>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #D3D3D5;">Contact</h5>
+        <p><i class="fas fa-home me-2"></i> City, State, ZIP</p>
+        <p><i class="fas fa-envelope me-2"></i> support@dairytohome.com</p>
+        <p><i class="fas fa-phone me-2"></i> +92 300 1234567</p>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #D3D3D5;">Follow Us</h5>
+        <a href="#" class="text-white me-3 social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="text-white me-3 social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-white me-3 social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-white me-3 social-icon"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="row mt-4">
+      <div class="col text-center">
+        <p class="mb-0" style="color: black;">&copy; 2025 Dairy To Home. All Rights Reserved.</p>
+      </div>
+    </div>
+
+  </div>
+</footer>
+<style>
+.footer-link:hover {
+  color: #00D1FF !important;
+  text-decoration: underline;
+  transition: color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+  transform: translateY(-5px); /* Moves the footer link 5px upwards */
+}
+
+.social-icon:hover {
+  color: #00D1FF !important;
+  transition: color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+  transform: translateY(-5px); /* Moves the social icon 5px upwards */
+}
+
+</style>
+
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  

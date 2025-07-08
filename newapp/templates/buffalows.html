@@ -1,0 +1,281 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  .products-section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #2c3e50;
+  }
+
+  .section-description {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 40px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+
+  .product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+    animation: slideIn 0.6s ease forwards;
+    opacity: 0;
+    height: 100%;
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .product-card h3 {
+    font-size: 1.3rem;
+    margin: 10px 0;
+  }
+
+  .product-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 15px;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .btn.buy {
+    background-color: #3498db;
+    color: white;
+  }
+
+  .btn.subscribe {
+    background-color: #19c05f;
+    color: white;
+  }
+
+  @keyframes slideIn {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    from {
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .products-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .product-card img {
+      height: 180px;
+    }
+  }
+</style>
+
+<section class="products-section">
+
+  
+  
+  
+  <title>Product Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .product-card {
+      background: whitesmoke;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      height: 100%;
+    }
+    .product-card img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .button-group {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container my-5">
+  <div class="row g-4">
+    
+    
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="{% static 'images/containers2.jpg' %}" alt="Product 1">
+        <h3>Fresh Milk</h3>
+        <p>30 liters</p>
+        <div class="button-group">
+          <a href="{% url 'order_form' %}" class="btn btn-primary">Order Now</a>
+         
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="{% static 'images/containers1.jpg' %}" alt="Product 1">
+        <h3>Fresh Milk</h3>
+        <p>50 liters</p>
+        <div class="button-group">
+          <a href="{% url 'order_form' %}" class="btn btn-primary">Order Now</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="{% static 'images/containers.jpg' %}" alt="Product 1">
+        <h3>Fresh Milk</h3>
+        <p> 100 liters </p>
+        <div class="button-group">
+          <a href="{% url 'order_form' %}" class="btn btn-primary">Order Now</a>
+         
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="{% static 'images/containers1.jpg' %}" alt="Product 1">
+        <h3>Fresh Milk</h3>
+        <p> 120 liters</p>
+        <div class="button-group">
+          <a href="{% url 'order_form' %}" class="btn btn-primary">Order Now</a>
+        
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="{% static 'images/containers2.jpg' %}" alt="Product 2">
+        <h3>Organic Yogurt</h3>
+        <p> 300 kg</p>
+        <div class="button-group">
+          <a href="{% url 'order_form' %}" class="btn btn-primary">Order Now</a>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="{% static 'images/containers.jpg' %}" alt="Product 3">
+        <h3>Desi Ghee</h3>
+        <p> 500 Kg</p>
+        <div class="button-group">
+          <a href="{% url 'order_form' %}" class="btn btn-primary">Order Now</a>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <style>
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      animation: fadeLeft 1s ease-in-out forwards;
+    }
+
+
+@keyframes fadeLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.modal-lg {
+  max-width: 800px;
+}
+
+.modal-content {
+  overflow: hidden;
+}
+
+
+  </style>
+</head>
+<body>
+
+<!-- Trigger Button -->
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+</section>
+
+{% endblock %}
+
+
+
+
+
+
+
+

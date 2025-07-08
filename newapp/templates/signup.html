@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+
+
+  .login-background {
+    background-image: url("{% static 'images/milk 13.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  }
+
+  .login-card h2 {
+    color: #000000;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+
+  .form-label {
+    color:black;
+    font-weight: 500;
+  }
+
+  .form-control {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+  }
+
+  .neon-btn {
+    background-color: #97642F;
+ 
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 50px;
+    width: 100%;
+    transition: all 0.4s ease;
+  }
+
+  
+
+  .toggle-option {
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+
+ 
+  .toggle-option a:hover {
+    text-decoration: underline;
+  }
+
+  .forgot-password {
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  .forgot-password a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+
+</style>
+
+<div class="login-background">
+  <div class="login-card">
+    <h2>Sign Up</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" required>
+  </div>
+
+      <div class="mb-3">
+        <label id="loginLabel" for="loginInput" class="form-label">Email address</label>
+        <input type="text" class="form-control" id="loginInput" name="login" placeholder="Your Email">
+        <div class="toggle-option">
+          <a onclick="toggleLoginType()">Use phone number instead</a>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Your password">
+      </div>
+
+      <div class="mb-3">
+    <label for="confirm_password" class="form-label">Confirm Password</label>
+    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+  </div>
+
+      <button type="submit" class="neon-btn mt-2">Login</button>
+
+      <div class="forgot-password">
+        <a href="#">Forgot Password? <a href="{% url 'login' %}"><b>Login</b></a></a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  let isEmail = true;
+  function toggleLoginType() {
+    const label = document.getElementById('loginLabel');
+    const input = document.getElementById('loginInput');
+    const toggleLink = document.querySelector('.toggle-option a');
+
+    if (isEmail) {
+      label.textContent = 'Phone number';
+      input.placeholder = '+92';
+      toggleLink.textContent = 'Use email instead';
+    } else {
+      label.textContent = 'Email address';
+      input.placeholder = 'you@example.com';
+      toggleLink.textContent = 'Use phone number instead';
+    }
+
+    isEmail = !isEmail;
+  }
+</script>
+{% endblock %}

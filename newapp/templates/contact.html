@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<style>
+  .slide-image {
+    position: relative;
+    left: -100%;
+    animation: slideRight 1s ease forwards;
+  }
+
+  @keyframes slideRight {
+    100% {
+      left: 0;
+    }
+  }
+
+  .neon-btn {
+    background-color: #97642F;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 25px;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    font-size: 18px;
+    letter-spacing: 1px;
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .neon-btn:hover {
+    transform: scale(1.05);
+  }
+
+  .contact-section {
+    background: linear-gradient(to right, #e0f7fa, #ffffff);
+    padding: 40px 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .signup-section {
+    background: linear-gradient(to right, #5a8fbb, #ffffff);
+    padding: 40px 20px;
+    border-radius: 20px;
+  }
+
+  .contact-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .form-container form {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .form-container h2 {
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 767.98px) {
+    .contact-section {
+      flex-direction: column;
+    }
+
+    .contact-image {
+      width: 100%;
+      height: 250px;
+    }
+
+    .form-container {
+      padding: 10px;
+    }
+
+    .form-container form {
+      padding: 20px;
+    }
+  }
+
+  
+
+</style>
+
+<div class="container signup-section my-5">
+  <div class="contact-section">
+    
+    <div class="col-md-6">
+      <img src="{% static 'images/milk1.jpg' %}" class="contact-image slide-image" alt="Dairy Farm">
+    </div>
+
+    <div class="col-md-6 form-container">
+      <h2 class="mb-4 text-center">Get in Touch With Us</h2>
+      
+      <form method="POST" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Your Message</label>
+          <textarea class="form-control" id="message" name="message" rows="4" placeholder="Write something..." required></textarea>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="neon-btn">Send Message</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
